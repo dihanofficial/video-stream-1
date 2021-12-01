@@ -56,8 +56,8 @@ async def ytdl(link):
         return 0, stderr.decode()
 
 
-@Client.on_message(command(["vplay", f"vplay@{BOT_USERNAME}"]) & other_filters)
-async def vplay(c: Client, m: Message):
+@Client.on_message(command(["videoplay", f"videoplay@{BOT_USERNAME}"]) & other_filters)
+async def videoplay(c: Client, m: Message):
     replied = m.reply_to_message
     chat_id = m.chat.id
     keyboard = InlineKeyboardMarkup(
@@ -125,7 +125,7 @@ async def vplay(c: Client, m: Message):
 
     if replied:
         if replied.video or replied.document:
-            loser = await replied.reply("📥 **downloading video...**")
+            loser = await replied.reply("📥 **Downloading video...**")
             dl = await replied.download()
             link = replied.link
             if len(m.command) < 2:
