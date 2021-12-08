@@ -56,15 +56,15 @@ async def ytdl(link):
         return 0, stderr.decode()
 
 
-@Client.on_message(command(["videoplay", f"videoplay@{BOT_USERNAME}"]) & other_filters)
+@Client.on_message(command(["vplay", f"vplay@{BOT_USERNAME}"]) & other_filters)
 async def videoplay(c: Client, m: Message):
     replied = m.reply_to_message
     chat_id = m.chat.id
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text="• Mᴇɴᴜ", callback_data="cbmenu"),
-                InlineKeyboardButton(text="• Cʟᴏsᴇ", callback_data="cls"),
+                InlineKeyboardButton(text="Menu", callback_data="cbmenu"),
+                InlineKeyboardButton(text="Close", callback_data="cls"),
             ]
         ]
     )
