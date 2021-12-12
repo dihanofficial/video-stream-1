@@ -60,14 +60,6 @@ async def ytdl(link):
 async def videoplay(c: Client, m: Message):
     replied = m.reply_to_message
     chat_id = m.chat.id
-    keyboard = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton(text="Menu", callback_data="cbmenu"),
-                InlineKeyboardButton(text="Close", callback_data="cls"),
-            ]
-        ]
-    )
     if m.sender_chat:
         return await m.reply_text("you're an __Anonymous Admin__ !\n\n» revert back to user account from admin rights.")
     try:
@@ -151,9 +143,13 @@ async def videoplay(c: Client, m: Message):
                 pos = add_to_queue(chat_id, songname, dl, link, "Video", Q)
                 await loser.delete()
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
+                thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
+                thumbnail = get_yt_info_id(videoid)
+                theme = random.choice(themes)
+                
                 await m.reply_photo(
                     photo=f"{IMG_1}",
-                    caption=f"💡 **Track added to queue »** `{pos}`\n\n🏷 **Name:** [{songname}]({link})\n💭 **Chat:** `{chat_id}`\n🎧 **Request by:** {requester}",
+                    caption=f"🎬<b>__Song:__</b>[{songname}]({link})\n💭<b>__Chat:__</b>{chat_id} \n👤<b>__Requested by:__ </b>{requester} \n🚧<b>__Queued at:__</b> <b>#{pos}!</b>"),
                     reply_markup=keyboard,
                 )
             else:
